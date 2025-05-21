@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ########### ENV VARS ###########
-NAME=spectral
+NAME=blockout
 IMAGE=blockchain_${NAME}
 HANDLER_PORT=8000
 LOCAL_RPC_PORT=5000
