@@ -53,4 +53,4 @@ Difficulty: <font color=light-green>Very-Easy</font>
 see the full exploitation script [here](./htb/solver.py).
 
 ---
-> `HTB{placeholder}`
+> `HTB{g4sL1ght1nG_th3_VCNK_its_GreatBl@ck0Ut_4ll_ov3r_ag4iN}`
