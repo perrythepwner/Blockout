@@ -1,24 +1,21 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.29;
 
-import { VCNK } from "./VCNK.sol";
+import { VCNKv2 } from "./VCNKv2.sol";
 
 contract Setup {
-    VCNK public TARGET;
-    address public player;
+    VCNKv2 public TARGET;
 
     event DeployedTarget(address at);
 
-    constructor(address _player) {
-        TARGET = new VCNK();
-        player = _player;
+    constructor(uint8 _nGateways) {
+        TARGET = new VCNKv2(_nGateways);
         emit DeployedTarget(address(TARGET));
     }
 
     function isSolved() public view returns (bool) {
         uint8 CU_STATUS_EMERGENCY = 3;
-        (uint8 status, , ,) = TARGET.controlUnit();
+        (uint8 status, , , , ) = TARGET.controlUnit();
         return status == CU_STATUS_EMERGENCY;
     }
 }

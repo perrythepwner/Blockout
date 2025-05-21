@@ -49,13 +49,7 @@ METHOD_NOT_ALLOWED = {
 
 def sendTransaction(web3: Web3, tx: Dict) -> Optional[TxReceipt]:
     if "gas" not in tx:
-        estimated_gas = web3.eth.estimate_gas(tx)
-        if estimated_gas is None or estimated_gas == 0:
-            raise EthSandboxError("failed to estimate gas")
-        tx["gas"] = estimated_gas
-
-    #if "gasPrice" not in tx:
-    #    tx["gasPrice"] = 0
+        tx["gas"] = 30_000_000
 
     txhash = web3.eth.send_transaction(tx)
 
@@ -86,6 +80,7 @@ def deploy(web3: Web3, deployer_address: str, constructor_args: List[Any]) -> st
     
     deploy_tx = {
         "from": deployer_address,
+        "gas": 30_000_000,
         "value": web3.to_wei(Config.SETUP_CONTRACT_BALANCE, 'ether'),
     }
     constructor_data = setup_contract.constructor(*constructor_args).build_transaction(deploy_tx)
@@ -123,6 +118,7 @@ def launch_node() -> Dict:
                 "--mnemonic", mnemonic,
                 "--port", str(node_port),
                 "--block-base-fee-per-gas", "0",
+                #"--print-traces"
                 ],
             stdout=logfile,
             stderr=logfile
@@ -154,7 +150,7 @@ def launch_node() -> Dict:
         web3.provider.make_request('anvil_setBalance', [bot_acct.address, hex(Web3.to_wei(Config.BOT_BALANCE, 'ether'))])
 
     # deploy contracts
-    setupAddress = deploy(web3, deployer_acct.address, [player_acct.address])
+    setupAddress = deploy(web3, deployer_acct.address, [2])
     targetAddress = getChallengeAddress(web3, setupAddress)
 
     node_info = {

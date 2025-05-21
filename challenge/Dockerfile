@@ -43,6 +43,8 @@ ENV PYTHONUNBUFFERED=1
 
 RUN true \
     && cd /home/ctf/backend/contracts/ \
+    && forge install --no-git OpenZeppelin/openzeppelin-contracts \
+    && forge remappings > /home/ctf/backend/contracts/remappings.txt \
     && forge build --out ./compiled \
     && true
 
