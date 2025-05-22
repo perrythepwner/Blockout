@@ -48,8 +48,8 @@ RUN true \
     && forge build --out ./compiled \
     && true
 
-EXPOSE 8888
 EXPOSE 8000
+EXPOSE 5000
 
 USER root
 WORKDIR /home/ctf/
