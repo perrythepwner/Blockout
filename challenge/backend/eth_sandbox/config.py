@@ -17,7 +17,7 @@ class Config:
     RECEIPT_POLL_INTERVAL: float = 0.1
     N_ACCOUNTS: int = 2
     N_BOTS: int = 0
-    DEPLOYER_BALANCE: int = 100 # ETH
+    DEPLOYER_BALANCE: int = 1 # ETH
     PLAYER_BALANCE: int = 150 # ETH
     BOT_BALANCE: int = 0 # ETH
     SETUP_CONTRACT_BALANCE: int = 0 # ETH
